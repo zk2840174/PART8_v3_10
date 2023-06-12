@@ -22,6 +22,13 @@ public class Custom403Handler implements AccessDeniedHandler {
         //JSON 요청이었는지 확인
         String contentType = request.getHeader("Content-Type");
 
+        if (contentType == null) {
+
+            response.sendRedirect("/member/login?error=ACCESS_DENIED");
+            return;
+        }
+
+
         boolean jsonRequest = contentType.startsWith("application/json");
 
         log.info("isJOSN: " + jsonRequest);
