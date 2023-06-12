@@ -30,10 +30,12 @@ public class CustomSecurityConfig {
 
     private final DataSource dataSource;
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new CustomUserDetailsService(passwordEncoder());
-    }
+    private final UserDetailsService userDetailsService;
+
+//    @Bean
+//    public UserDetailsService userDetailsService(){
+//        return new CustomUserDetailsService(passwordEncoder());
+//    }
 
 
     @Bean
@@ -63,7 +65,7 @@ public class CustomSecurityConfig {
 
             httpSecurityRememberMeConfigurer.key("12345678")
                     .tokenRepository(persistentTokenRepository())
-                    .userDetailsService(userDetailsService())
+                    .userDetailsService(userDetailsService)
                     .tokenValiditySeconds(60*60*24*30);
 
         });
